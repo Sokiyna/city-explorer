@@ -68,3 +68,37 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+**Author**: Sokiyna
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+
+## Overview
+The website is desgined to explore the cities and maps and many details. 
+
+## Getting Started
+Follow the lab insruction
+
+## Architecture
+LocationIQ, bootstrap, axios, thunder, json
+
+## Change Log
+
+
+5/23/2021 7:30pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+1- Razan
+2- Rana(my TA)
+3- My team member.
+4- MDN.
+
+
+Name of feature: Netlify, LocationIQ
+
+Estimate of time needed to complete: 5 Hours
+
+Start time: 3:00 pm 
+
+Finish time: 7:00 pm 
+
+Actual time needed to complete: 5.30 hours 
