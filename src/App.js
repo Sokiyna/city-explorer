@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button, Card } from 'react-bootstrap/';
+import { Card, Form, Button } from 'react-bootstrap/';
+import Weather from './components/Weather';
 
 
 class App extends React.Component {
@@ -12,7 +13,11 @@ class App extends React.Component {
       findQuery: '',
       dataLoc: '',
       showMap: false,
-      notFoundError: false
+      notFoundError: false,
+      displayWeather: false,
+      wehtherInfo: [],
+      latitude: '',
+      longitude: '',
 
     }
 
@@ -21,29 +26,34 @@ class App extends React.Component {
 
   callLocation = async (prv) => {
     prv.preventDefault();
+    let serverPort = process.env.REACT_APP_SERVER;
+
 
     let getUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.4e4dd19b6c2d803499c2e0249f1a1804&q=${this.state.findQuery}&format=json`;
+    let weahtherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}&lon=${this.state.dataLoc.lon}&lat=${this.state.dataLoc.lat}`);
+
 
     try {
-
       let locOutcome = await axios.get(getUrl);
-
       this.setState({
         dataLoc: locOutcome.data[0],
-        showMap: true
+        showMap: true,
+        wehtherInfo: weahtherData,
+        displayWeather: true,
+
       })
     }
-
-
     catch {
       this.setState({
         showMap: false,
-        notFoundError: true
+        notFoundError: true,
+        displayWeather: false,
       })
     }
 
-  }
 
+
+  }
 
 
 
@@ -85,7 +95,8 @@ class App extends React.Component {
           </Card>
         }
 
-       
+        <Weather weatherData={this.state.wehtherInfo} /><Weather />
+
       </>
     )
   }
