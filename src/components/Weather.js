@@ -5,12 +5,7 @@ import Card from 'react-bootstrap/Card';
 
 
 class Weather extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    newWeatherArr: this.props.weatherData
-    }
-  }
+
 
   render() {
 
@@ -22,14 +17,25 @@ class Weather extends React.Component {
             <Card.Title>Weather</Card.Title>
 
             <Card.Text>
-            First Day: {this.props.weatherData[0].date}<br />
-            First Day: {this.props.weatherData[0].description}<br />
 
-            Second Day: {this.props.weatherData[1].date}<br />
-            Second Day: {this.props.weatherData[1].description}<br />
+              {this.props.weatherData.map(item => (
+                <div>
+                  <p>day {item.date}</p>
+                  <p>description {item.description}</p>
 
-            Third Day: {this.props.weatherData[2].date}<br />
-            Third Day {this.props.weatherData[2].description}<br />
+                </div>
+
+
+              ))}
+
+              {/* First Day: {this.newWeatherArr.date}<br />
+            First Day: {this.newWeatherArr[0].discription}<br />
+
+            Second Day: {this.newWeatherArr[1]}<br />
+            Second Day: {this.newWeatherArr[1]}<br />
+
+            Third Day: {this.newWeatherArr[2]}<br />
+            Third Day {this.newWeatherArr[2]}<br /> */}
             </Card.Text>
 
             <Card.Text>
