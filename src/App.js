@@ -23,25 +23,31 @@ class App extends React.Component {
 
   }
 
-
   callLocation = async (prv) => {
     prv.preventDefault();
     let serverPort = process.env.REACT_APP_SERVER;
 
 
     let getUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.4e4dd19b6c2d803499c2e0249f1a1804&q=${this.state.findQuery}&format=json`;
-    let weahtherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}&lon=${this.state.dataLoc.lon}&lat=${this.state.dataLoc.lat}`);
+
+    // let weahtherData = await axios.get(`${serverPort}/weather`,{params:{cityName:this.state.findQuery}});
 
 
     try {
+      let weahtherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}`);
+
+
       let locOutcome = await axios.get(getUrl);
       this.setState({
         dataLoc: locOutcome.data[0],
         showMap: true,
         wehtherInfo: weahtherData,
-        displayWeather: true,
+        displayWeather: true
 
       })
+
+
+
     }
     catch {
       this.setState({
