@@ -15,7 +15,7 @@ class App extends React.Component {
       showMap: false,
       notFoundError: false,
       displayWeather: false,
-      wehtherInfo: [],
+      weatherInfo: [],
       latitude: '',
       longitude: '',
 
@@ -26,25 +26,38 @@ class App extends React.Component {
   callLocation = async (prv) => {
     prv.preventDefault();
     let serverPort = process.env.REACT_APP_SERVER;
+    console.log(serverPort);
 
 
     let getUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.4e4dd19b6c2d803499c2e0249f1a1804&q=${this.state.findQuery}&format=json`;
 
     // let weahtherData = await axios.get(`${serverPort}/weather`,{params:{cityName:this.state.findQuery}});
-
-
-    try {
-      let weahtherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}`);
-
-
+     try{
       let locOutcome = await axios.get(getUrl);
+
       this.setState({
         dataLoc: locOutcome.data[0],
         showMap: true,
-        wehtherInfo: weahtherData,
+
+      })
+
+      console.log(this.state.dataLoc);
+
+
+     }catch{
+     }
+
+    try {
+      let weatherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}`);
+
+
+      this.setState({
+        weatherInfo: weatherData.data,
         displayWeather: true
 
       })
+
+      console.log(this.state.weatherInfo);
 
 
 
@@ -55,6 +68,7 @@ class App extends React.Component {
         notFoundError: true,
         displayWeather: false,
       })
+      console.log('weather error');
     }
 
 
@@ -100,8 +114,10 @@ class App extends React.Component {
             </Card.Body>
           </Card>
         }
-
-        <Weather weatherData={this.state.wehtherInfo} /><Weather />
+        {this.state.displayWeather &&
+        <Weather weatherData={this.state.weatherInfo} />
+        }
+     
 
       </>
     )
