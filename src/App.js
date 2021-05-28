@@ -3,6 +3,8 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Form, Button } from 'react-bootstrap/';
 import Weather from './components/Weather';
+import Movie from './components/Movie';
+
 
 
 class App extends React.Component {
@@ -15,7 +17,9 @@ class App extends React.Component {
       showMap: false,
       notFoundError: false,
       displayWeather: false,
+      displayMovie: false,
       weatherInfo: [],
+      movieInfo: [],
       latitude: '',
       longitude: '',
 
@@ -32,7 +36,7 @@ class App extends React.Component {
     let getUrl = `https://eu1.locationiq.com/v1/search.php?key=pk.4e4dd19b6c2d803499c2e0249f1a1804&q=${this.state.findQuery}&format=json`;
 
     // let weahtherData = await axios.get(`${serverPort}/weather`,{params:{cityName:this.state.findQuery}});
-     try{
+    try {
       let locOutcome = await axios.get(getUrl);
 
       this.setState({
@@ -44,8 +48,8 @@ class App extends React.Component {
       console.log(this.state.dataLoc);
 
 
-     }catch{
-     }
+    } catch {
+    }
 
     try {
       let weatherData = await axios.get(`${serverPort}/weather?cityName=${this.state.findQuery}`);
@@ -71,9 +75,34 @@ class App extends React.Component {
       console.log('weather error');
     }
 
+    try {
+      let movieData = await axios.get(`${serverPort}/movie?cityName=${this.state.findQuery}`);
+
+      this.setState({
+        movieInfo: movieData.data,
+        displayMovie: true,
+      })
+
+      console.log(this.state.movieData);
+
+
+    } catch {
+      this.setState({
+        showMap: false,
+        notFoundError: true,
+        displayWeather: false,
+        displayMovie: false,
+
+      })
+
+    }
+
+
 
 
   }
+
+
 
 
 
@@ -115,15 +144,20 @@ class App extends React.Component {
           </Card>
         }
         {this.state.displayWeather &&
-        <Weather weatherData={this.state.weatherInfo} />
+          <Weather weatherData={this.state.weatherInfo} />
         }
-     
+
+        {this.state.displayMovie &&
+
+        <Movie movieData={this.state.movieInfo} />
+
+        }
+
 
       </>
     )
   }
 }
-
 
 
 export default App;
