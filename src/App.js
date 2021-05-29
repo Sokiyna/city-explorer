@@ -156,7 +156,7 @@ class App extends React.Component {
         }
 
         {this.state.displayMovie &&
-          <Movie movieData={this.state.movieInfo} />
+          <Movie display={this.state.displayMovie} movieData={this.state.movieInfo}  />
 
         }
 
