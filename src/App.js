@@ -49,6 +49,13 @@ class App extends React.Component {
 
 
     } catch {
+      this.setState({
+        showMap: false,
+        notFoundError: true,
+
+      })
+
+
     }
 
     try {
@@ -57,7 +64,7 @@ class App extends React.Component {
 
       this.setState({
         weatherInfo: weatherData.data,
-        displayWeather: true
+        displayWeather: true,
 
       })
 
@@ -83,10 +90,11 @@ class App extends React.Component {
         displayMovie: true,
       })
 
-      console.log(this.state.movieData);
+      // console.log(this.state.movieData);
 
 
-    } catch {
+    }
+    catch {
       this.setState({
         showMap: false,
         notFoundError: true,
@@ -130,7 +138,7 @@ class App extends React.Component {
         </Form>
 
         {this.state.showMap &&
-          <Card style={{ width: '18rem' }}>
+          <Card style={{ width: '20rem', height:'35rem' }}>
             <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=pk.318d7e351679b370b49a56a43771dcfc&center=${this.state.dataLoc.lat},${this.state.dataLoc.lon}`} />
             <Card.Body>
               <Card.Title>Locations</Card.Title>
@@ -148,8 +156,7 @@ class App extends React.Component {
         }
 
         {this.state.displayMovie &&
-
-        <Movie movieData={this.state.movieInfo} />
+          <Movie display={this.state.displayMovie} movieData={this.state.movieInfo}  />
 
         }
 

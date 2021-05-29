@@ -12,7 +12,7 @@ class Weather extends React.Component {
     return (
       <>
 
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '20rem', height:'35rem' }}>
           <Card.Body>
             <Card.Title>Weather</Card.Title>
             {/* {console.log(this.props.weatherData)} */}
